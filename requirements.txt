@@ -1,1 +1,7 @@
 pytest
+unsloth
+torch
+trl
+transformers
+numpy
+pandas
