@@ -1,0 +1,57 @@
+{
+  "endpoint": "create",
+  "args": {
+    "id": "org.c9.function.bioinformatics.formatter_LLM",
+    "name": "formatter_LLM",
+    "description": "Adds amino acids to the tokenizer vocabulary and ensures the tokenizer treats specified amino acids as individual tokens.",
+    "type": "function",
+    "keywords": ["tokenizer", "amino acids", "vocabulary", "bioinformatics"],
+    "inputs": [
+      {
+        "name": "tokenizer",
+        "type": "transformers.tokenization_utils_fast.PreTrainedTokenizerFast",
+        "description": "A tokenizer object (from the transformers library) to which amino acid tokens will be added."
+      },
+      {
+        "name": "amino_acids",
+        "type": "list",
+        "description": "A list of amino acids (single-letter codes) to add as individual tokens to the tokenizer."
+      }
+    ],
+    "outputs": [
+      {
+        "type": "transformers.tokenization_utils_fast.PreTrainedTokenizerFast",
+        "description": "Updated tokenizer with the added amino acid tokens."
+      }
+    ],
+    "examples": [
+      {
+        "input": {
+          "tokenizer": "PreTrainedTokenizerFast instance",
+          "amino_acids": ["A", "C", "D", "E", "F", "G", "H", "I", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "Y"]
+        },
+        "output": "PreTrainedTokenizerFast instance with amino acids added as tokens",
+        "description": "Each amino acid is now treated as an individual token by the tokenizer."
+      },
+      {
+        "input": {
+          "tokenizer": "PreTrainedTokenizerFast instance",
+          "amino_acids": ["W", "K", "L"]
+        },
+        "output": "PreTrainedTokenizerFast instance with only W, K, and L added as individual tokens",
+        "description": "The amino acids W, K, and L are treated as individual tokens, while others may remain grouped."
+      }
+    ],
+    "execution_details": {
+      "language": "python",
+      "source": "def formatter_LLM(tokenizer, amino_acids): [full function implementation here]",
+      "invocation": "formatter_LLM(var:tokenizer, var:amino_acids)"
+    },
+    "test_cases": [
+      {
+        "description": "Ensure amino acids are treated as individual tokens",
+        "code": "sample_sequences = [\"MSLEQKKGADIISKIL\", \"ACDEFGHIKLMNPQRSTVWY\", \"GTTSPSTLKTKLSEISR\"]\nfor seq in sample_sequences:\n    tokens = tokenizer.tokenize(seq)\n    print(f\"Original: {seq}\")\n    print(f\"Tokens: {tokens}\")\n    print(f\"Decoded: {tokenizer.decode(tokenizer.convert_tokens_to_ids(tokens))}\")\n    print(\"-\" * 20)"
+      }
+    ]
+  }
+}
