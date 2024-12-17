@@ -1,0 +1,59 @@
+{
+  "endpoint": "create",
+  "args": {
+    "id": "org.c9.function.bioinformatics.cleaner",
+    "name": "cleaner",
+    "description": "Filters and cleans up data for conversational formatting, where the user input is structured as a question and the output is the model's response.",
+    "type": "function",
+    "keywords": ["data cleaning", "bioinformatics", "conversational format"],
+    "inputs": [
+      {
+        "name": "df",
+        "type": "dataframe",
+        "description": "A pandas DataFrame containing columns such as 'Entry', 'Organism', 'Length', 'Sequence', and other protein details."
+      }
+    ],
+    "outputs": [
+      {
+        "type": "list",
+        "description": "A list containing conversationally formatted input and output for each protein sequence."
+      }
+    ],
+    "examples": [
+      {
+        "input": {
+          "df": {
+            "columns": ["Entry", "Organism", "Length", "Sequence", "Function [CC]", "Subcellular location [CC]", "Domain [CC]", "Protein families"],
+            "rows": [
+              [
+                "A0A044RE18",
+                "Onchocerca volvulus",
+                693,
+                "MYWQLVRILVLFDCLQKILAIEHDSICIADVDDACPEPSHTVMRLRERNDKKAHLIAKQHGLEIRGQPFLDGKSYFVTHISKQRSRRRKREIISRLQEHPDILSIEEQRPRVRRKRDFLYPDIAHELAGSSTNIRHTGLISNTEPRIDFIQHDAPVLPFPDPLYKEQWYLNNGAQGGFDMNVQAAWLLGYAGRNISVSILDDGIQRDHPDLAANYDPLASTDINGHDDDPTPQDDGDNKHGTRCAGEVASIAGNVYCGVGVAFHAKIGGVRMLDGPVSDSVEAASLSLNRHHIDIYSASWGPEDDGRTFDGPGPLAREAFYRGVKAGRGGKGSIFVWASGNGGSRQDSCSADGYTTSVYTLSVSSATIDNRSPWYLEECPSTIATTYSSANMNQPAIITVDVPHGCTRSHTGTSASAPLAAGIIALALEANPNLTWRDMQHIVLRTANPVPLLNNPGWSVNGVGRRINNKFGYGLMDAGALVKLALIWKTVPEQHICTYDYKLEKPNPRPITGNFQMNFSLEVNGCESGTPVLYLEHVQVLATFRFGKRGDLKLTLFSPRGTSSVLLPPRPQDFNSNGIHKWPFLSVQTWGEDPRGKWTLMVESVSTNRNVGGTFHDWSLLLYGTAEPAQPNDPRHSSVVPSSVSAESPFDRITQHIASQEKKKKQRDSRDWQPKKVENKKSLLVSAQPELRV",
+                "FUNCTION: Serine endoprotease which cleaves substrates at the RX(K/R)R consensus motif. {ECO:0000269|PubMed:12855702}.",
+                "SUBCELLULAR LOCATION: Secreted {ECO:0000305|PubMed:12855702}.",
+                "None",
+                "Peptidase S8 family, Furin subfamily"
+              ]
+            ]
+          }
+        },
+        "output": [
+          {
+            "content": "What information can you tell me about the protein sequence: MYWQLVRILVLFDCLQKILAIEHDSICIADVDDACPEPSHTVMRLRERNDKKAHLIAKQHGLEIRGQPFLDGKSYFVTHISKQRSRRRKREIISRLQEHPDILSIEEQRPRVRRKRDFLYPDIAHELAGSSTNIRHTGLISNTEPRIDFIQHDAPVLPFPDPLYKEQWYLNNGAQGGFDMNVQAAWLLGYAGRNISVSILDDGIQRDHPDLAANYDPLASTDINGHDDDPTPQDDGDNKHGTRCAGEVASIAGNVYCGVGVAFHAKIGGVRMLDGPVSDSVEAASLSLNRHHIDIYSASWGPEDDGRTFDGPGPLAREAFYRGVKAGRGGKGSIFVWASGNGGSRQDSCSADGYTTSVYTLSVSSATIDNRSPWYLEECPSTIATTYSSANMNQPAIITVDVPHGCTRSHTGTSASAPLAAGIIALALEANPNLTWRDMQHIVLRTANPVPLLNNPGWSVNGVGRRINNKFGYGLMDAGALVKLALIWKTVPEQHICTYDYKLEKPNPRPITGNFQMNFSLEVNGCESGTPVLYLEHVQVLATFRFGKRGDLKLTLFSPRGTSSVLLPPRPQDFNSNGIHKWPFLSVQTWGEDPRGKWTLMVESVSTNRNVGGTFHDWSLLLYGTAEPAQPNDPRHSSVVPSSVSAESPFDRITQHIASQEKKKKQRDSRDWQPKKVENKKSLLVSAQPELRV",
+            "role": "user"
+          },
+          {
+            "content": "This sequence Serine endoprotease which cleaves substrates at the RXR consensus motif. Secreted. Peptidase S8 family, Furin subfamily.",
+            "role": "assistant"
+          }
+        ]
+      }
+    ],
+    "execution_details": {
+      "language": "python",
+      "source": "def cleaner(df): [full function implementation here]",
+      "invocation": "cleaner(var:df)"
+    }
+  }
+}
