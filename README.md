@@ -6,14 +6,17 @@ This project provides core bioinformatics utilities for analyzing protein sequen
 The project includes the following functionalities:
 1. **Cleaner**: Converts protein data into a conversational format for LLMs and cleans up data for better readability.
 2. **Formatter_LLM**: Updates the tokenizer to treat amino acids as individual tokens for LLMs, improving the handling of protein sequences in transformer models.
+3. **Genetic_Frame_Final_Proj.ipynb**: Main notebook. Goes through data downloading process, preprocessing, tokenizing data, putting into Llama format, training LLama model, and testing model with the help of the 2 functions above.
 
 Both functions are designed to preprocess protein sequences, enabling efficient model training and data analysis for bioinformatics tasks.
 
 ## Scope of Work
-For this final project, I developed two functions aimed at simplifying the preprocessing of protein data for large language models:
+For this final project, I developed two functions aimed at simplifying the preprocessing of protein data for large language models, along with the notebook:
 1. **Cleaner**: This function processes protein data, converting it into a format that LLMs can understand. The function takes a dataset and cleans it by removing unnecessary information while structuring it as a dialogue between a user and a model.
    
 2. **Formatter_LLM**: This function updates the tokenizer to treat individual amino acids as distinct tokens. This is crucial for improving how protein sequences are tokenized, ensuring that each amino acid is processed correctly by the model.
+   
+3. **Genetic_Frame_Final_Proj.ipynb**: Notebook implements fine tuning to tune Llama so it can understand protein sequencing data and predict the function of a protein given its amino acid sequence.
 
 These utilities are critical for transforming raw sequence data into a usable format for downstream tasks such as protein function prediction or sequence analysis.
 
