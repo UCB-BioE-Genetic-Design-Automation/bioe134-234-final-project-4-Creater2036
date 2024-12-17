@@ -1,109 +1,112 @@
-
-# BioE 134 Final Project Submission
-
+# Genetic Frame Final Project Submission
 ## Project Overview
+This project provides core bioinformatics utilities for analyzing protein sequences and improving the tokenization process for transformer models. The focus is on automating sequence data preparation for large language models (LLMs) in bioinformatics applications.
 
-This project provides two core bioinformatics utilities: 
+The project includes the following functionalities:
 
-1. **Reverse Complement (revcomp)**: Calculates the reverse complement of a DNA sequence.
-2. **Translate**: Translates a DNA sequence into a protein sequence according to the standard genetic code.
-
-These functions are implemented in **Python** and are part of the broader bioinformatics toolset aimed at automating genetic sequence analysis tasks.
-
----
+Cleaner: Converts protein data into a conversational format for LLMs and cleans up data for better readability.
+Formatter_LLM: Updates the tokenizer to treat amino acids as individual tokens for LLMs, improving the handling of protein sequences in transformer models.
+Both functions are designed to preprocess protein sequences, enabling efficient model training and data analysis for bioinformatics tasks.
 
 ## Scope of Work
+For this final project, I developed two functions aimed at simplifying the preprocessing of protein data for large language models:
 
-As part of the final project for BioE 134, I developed two functions that are foundational for sequence analysis:
+Cleaner: This function processes protein data, converting it into a format that LLMs can understand. The function takes a dataset and cleans it by removing unnecessary information while structuring it as a dialogue between a user and a model.
 
-1. **Reverse Complement**: This function returns the reverse complement of a DNA sequence, which is an essential task in many genetic analysis pipelines.
-   
-2. **Translate**: This function translates a DNA sequence into a corresponding protein sequence by converting each codon into its corresponding amino acid, based on the standard genetic code.
+Formatter_LLM: This function updates the tokenizer to treat individual amino acids as distinct tokens. This is crucial for improving how protein sequences are tokenized, ensuring that each amino acid is processed correctly by the model.
 
-Both functions include input validation and error handling to ensure proper use. The reverse complement function raises an error for sequences containing invalid characters, while the translate function raises an error for sequences not divisible by three, as well as sequences containing invalid characters.
-
----
+These utilities are critical for transforming raw sequence data into a usable format for downstream tasks such as protein function prediction or sequence analysis.
 
 ## Function Descriptions
+1. Cleaner (cleaner)
+Description: This function transforms protein data into a conversational format suitable for LLMs. It cleans up data by removing unnecessary information and structures it into a question-response format.
 
-### 1. Reverse Complement (`reverse_complement`)
+Input: A pandas DataFrame containing protein information such as Entry, Organism, Sequence, Function, Subcellular Location, Domain, and Protein Families.
+Output: A list of conversational pairs where the user asks about a protein sequence, and the model responds with relevant information about the protein.
+Example:
 
-- **Description**: This function takes a DNA sequence and returns its reverse complement. Only valid nucleotides (A, T, C, G) are allowed. The function raises a `ValueError` if invalid characters are found.
-- **Input**: A string representing the DNA sequence.
-- **Output**: A string representing the reverse complement of the input DNA sequence.
+python
+Copy code
+cleaner(df)
+Returns: [{'content': 'What information can you tell me about the protein sequence: ...', 'role': 'user'}, 
+          {'content': 'This sequence...', 'role': 'assistant'}]
+2. Formatter_LLM (formatter_LLM)
+Description: This function modifies a tokenizer by adding amino acids as individual tokens, enabling the tokenizer to handle protein sequences more accurately in a transformer model.
 
-**Example**:
-```python
-reverse_complement("ATGC")
-# Returns: "GCAT"
-```
+Input: A tokenizer (from FastLanguageModel) and a list of amino acids to treat as individual tokens.
+Output: A tokenizer updated with new tokens for the specified amino acids.
+Example:
 
-### 2. Translate (`translate`)
-
-- **Description**: This function translates a DNA sequence into a corresponding protein sequence. The input sequence must be divisible by 3. If it contains invalid characters or is not a multiple of three, the function raises a `ValueError`. Stop codons are represented as underscores (`_`).
-- **Input**: A string representing the DNA sequence.
-- **Output**: A string representing the translated protein sequence.
-
-**Example**:
-```python
-translate("ATGGCC")
-# Returns: "MA"
-```
-
----
-
+python
+Copy code
+formatter_LLM(tokenizer, ["A", "C", "D", "E"])
+Returns: Updated tokenizer with amino acids A, C, D, E as individual tokens
 ## Error Handling
-
-### Reverse Complement
-- Raises `ValueError` if invalid characters (anything other than A, T, C, G) are present in the DNA sequence.
-
-### Translate
-- Raises `ValueError` if the sequence contains invalid characters or if the sequence length is not a multiple of three.
-
----
-
+Cleaner
+Raises ValueError if the input DataFrame does not have the required columns or is not in the correct format.
+Formatter_LLM
+Raises ValueError if the amino_acids parameter is not provided as a list.
 ## Testing
+Both functions have been thoroughly tested with various input cases, including standard, edge, and invalid cases. Testing was implemented using pytest.
 
-Both functions have been tested with standard, edge, and invalid input cases. A comprehensive suite of tests has been implemented using **pytest**.
-
-- **Test File**: `tests/test_bio_functions.py`
-
+Test Files:
+tests/test_cleaner.py
+tests/test_formatter.py
 The tests include:
-- Valid sequences
-- Sequences containing invalid characters
-- Sequences with lengths not divisible by three (for the translate function)
-- Palindromic sequences (for reverse complement)
-- Lowercase input handling
 
----
-
+Valid protein sequences.
+Sequences with missing or invalid data.
+Validation of tokenizer behavior for different amino acids.
+Proper error handling for incorrect input types.
 ## Usage Instructions
+To use these utilities, clone the repository and install the required dependencies.
 
-Clone the repository and install the required dependencies listed in `requirements.txt`. The functions can be imported from the `bio_functions.py` module.
+Clone the repository:
 
-**Example**:
+bash
+Copy code
+git clone <your-github-repo-url>
+Install dependencies: If you have a requirements.txt file, install the required dependencies:
 
-```bash
+bash
+Copy code
 pip install -r requirements.txt
-```
+Example usage:
 
-Once installed, you can use the functions as follows:
+python
+Copy code
+from helper_funcs.cleaner_function import cleaner
+from helper_funcs.formatter_function import formatter_LLM
 
-```python
-from bio_functions import reverse_complement, translate
+## Example DataFrame for cleaner
+import pandas as pd
+df = pd.DataFrame({
+    'Entry': ['A0A044RE18'],
+    'Organism': ['Onchocerca volvulus'],
+    'Length': [693],
+    'Sequence': ['MYWQLVRILVLFDCLQKILAIEHDSICIADVDDACPEPSHTVMRLRERNDKKAHLIAKQHGLEIRGQPFLDGKSYFVTHISKQRSRRRKREIISRLQEHPDILSIEEQRPRVRRKRDFLYPDIAHELAGSSTNIRHTGLISNTEPRIDFIQHDAPVLPFPDPLYKEQWYLNNGAQGGFDMNVQAAWLLGYAGRNISVSILDDGIQRDHPDLAANYDPLASTDINGHDDDPTPQDDGDNKHGTRCAGEVASIAGNVYCGVGVAFHAKIGGVRMLDGPVSDSVEAASLSLNRHHIDIYSASWGPEDDGRTFDGPGPLAREAFYRGVKAGRGGKGSIFVWASGNGGSRQDSCSADGYTTSVYTLSVSSATIDNRSPWYLEECPSTIATTYSSANMNQPAIITVDVPHGCTRSHTGTSASAPLAAGIIALALEANPNLTWRDMQHIVLRTANPVPLLNNPGWSVNGVGRRINNKFGYGLMDAGALVKLALIWKTVPEQHICTYDYKLEKPNPRPITGNFQMNFSLEVNGCESGTPVLYLEHVQVLATFRFGKRGDLKLTLFSPRGTSSVLLPPRPQDFNSNGIHKWPFLSVQTWGEDPRGKWTLMVESVSTNRNVGGTFHDWSLLLYGTAEPAQPNDPRHSSVVPSSVSAESPFDRITQHIASQEKKKKQRDSRDWQPKKVENKKSLLVSAQPELRV'],
+    'Function [CC]': ['FUNCTION: Serine endoprotease which cleaves substrates at the RX(K/R)R consensus motif. {ECO:0000269|PubMed:12855702}.'],
+    'Subcellular location [CC]': ['SUBCELLULAR LOCATION: Secreted {ECO:0000305|PubMed:12855702}.'],
+    'Domain [CC]': ['None'],
+    'Protein families': ['Peptidase S8 family, Furin subfamily']
+})
 
-# Example DNA sequence
-dna_sequence = "ATGC"
+#Clean the data
+cleaned_data = cleaner(df)
 
-# Reverse complement
-print(reverse_complement(dna_sequence))
+#Tokenizer example for formatter_LLM
+from unsloth import FastLanguageModel
+model, tokenizer = FastLanguageModel.from_pretrained(
+    model_name="unsloth/Llama-3.2-3B-Instruct",
+    max_seq_length=2048,
+    dtype=None,
+    load_in_4bit=True
+)
 
-# Translate
-print(translate("ATGGCC"))
-```
+#Update tokenizer with amino acids
+updated_tokenizer = formatter_LLM(tokenizer, ["A", "C", "D", "E"])
 
----
+print(cleaned_data)
+Conclusion
+These functions provide foundational utilities for working with protein sequences and enhancing the tokenization process for large language models in bioinformatics. They have been thoroughly tested and are ready for integration into bioinformatics pipelines.
 
-## Conclusion
-
-These two functions provide foundational operations for working with DNA sequences in bioinformatics pipelines. They have been tested and documented, ensuring proper error handling and robust functionality.
