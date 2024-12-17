@@ -1,84 +1,92 @@
 # Genetic Frame Final Project Submission
+
 ## Project Overview
 This project provides core bioinformatics utilities for analyzing protein sequences and improving the tokenization process for transformer models. The focus is on automating sequence data preparation for large language models (LLMs) in bioinformatics applications.
 
 The project includes the following functionalities:
+1. **Cleaner**: Converts protein data into a conversational format for LLMs and cleans up data for better readability.
+2. **Formatter_LLM**: Updates the tokenizer to treat amino acids as individual tokens for LLMs, improving the handling of protein sequences in transformer models.
 
-Cleaner: Converts protein data into a conversational format for LLMs and cleans up data for better readability.
-Formatter_LLM: Updates the tokenizer to treat amino acids as individual tokens for LLMs, improving the handling of protein sequences in transformer models.
 Both functions are designed to preprocess protein sequences, enabling efficient model training and data analysis for bioinformatics tasks.
 
 ## Scope of Work
 For this final project, I developed two functions aimed at simplifying the preprocessing of protein data for large language models:
-
-Cleaner: This function processes protein data, converting it into a format that LLMs can understand. The function takes a dataset and cleans it by removing unnecessary information while structuring it as a dialogue between a user and a model.
-
-Formatter_LLM: This function updates the tokenizer to treat individual amino acids as distinct tokens. This is crucial for improving how protein sequences are tokenized, ensuring that each amino acid is processed correctly by the model.
+1. **Cleaner**: This function processes protein data, converting it into a format that LLMs can understand. The function takes a dataset and cleans it by removing unnecessary information while structuring it as a dialogue between a user and a model.
+   
+2. **Formatter_LLM**: This function updates the tokenizer to treat individual amino acids as distinct tokens. This is crucial for improving how protein sequences are tokenized, ensuring that each amino acid is processed correctly by the model.
 
 These utilities are critical for transforming raw sequence data into a usable format for downstream tasks such as protein function prediction or sequence analysis.
 
 ## Function Descriptions
-1. Cleaner (cleaner)
-Description: This function transforms protein data into a conversational format suitable for LLMs. It cleans up data by removing unnecessary information and structures it into a question-response format.
 
-Input: A pandas DataFrame containing protein information such as Entry, Organism, Sequence, Function, Subcellular Location, Domain, and Protein Families.
-Output: A list of conversational pairs where the user asks about a protein sequence, and the model responds with relevant information about the protein.
-Example:
+### 1. Cleaner (`cleaner`)
+**Description**: This function transforms protein data into a conversational format suitable for LLMs. It cleans up data by removing unnecessary information and structures it into a question-response format.
 
-python
-Copy code
+- **Input**: A pandas DataFrame containing protein information such as `Entry`, `Organism`, `Sequence`, `Function`, `Subcellular Location`, `Domain`, and `Protein Families`.
+- **Output**: A list of conversational pairs where the user asks about a protein sequence, and the model responds with relevant information about the protein.
+  
+**Example**:
+
+```python
 cleaner(df)
-Returns: [{'content': 'What information can you tell me about the protein sequence: ...', 'role': 'user'}, 
-          {'content': 'This sequence...', 'role': 'assistant'}]
-2. Formatter_LLM (formatter_LLM)
-Description: This function modifies a tokenizer by adding amino acids as individual tokens, enabling the tokenizer to handle protein sequences more accurately in a transformer model.
+# Returns: [{'content': 'What information can you tell me about the protein sequence: ...', 'role': 'user'}, 
+#            {'content': 'This sequence...', 'role': 'assistant'}]
+```
+### 2. Formatter_LLM (`formatter_LLM`)
+**Description**: This function modifies a tokenizer by adding amino acids as individual tokens, enabling the tokenizer to handle protein sequences more accurately in a transformer model.
 
-Input: A tokenizer (from FastLanguageModel) and a list of amino acids to treat as individual tokens.
-Output: A tokenizer updated with new tokens for the specified amino acids.
-Example:
+- **Input**: A tokenizer (from FastLanguageModel) and a list of amino acids to treat as individual tokens.
+- **Output**: A tokenizer updated with new tokens for the specified amino acids.
+**Example**:
 
-python
-Copy code
+```python
 formatter_LLM(tokenizer, ["A", "C", "D", "E"])
-Returns: Updated tokenizer with amino acids A, C, D, E as individual tokens
+# Returns: Updated tokenizer with amino acids A, C, D, E as individual tokens
+```
 ## Error Handling
-Cleaner
-Raises ValueError if the input DataFrame does not have the required columns or is not in the correct format.
-Formatter_LLM
-Raises ValueError if the amino_acids parameter is not provided as a list.
+
+### Cleaner
+- **Raises `ValueError`** if the input DataFrame does not have the required columns or is not in the correct format.
+
+### Formatter_LLM
+- **Raises `ValueError`** if the `amino_acids` parameter is not provided as a list.
+
 ## Testing
-Both functions have been thoroughly tested with various input cases, including standard, edge, and invalid cases. Testing was implemented using pytest.
+Both functions have been thoroughly tested with various input cases, including standard, edge, and invalid cases. Testing was implemented using **pytest**.
 
-Test Files:
-tests/test_cleaner.py
-tests/test_formatter.py
+### Test Files:
+- `tests/test_cleaner.py`
+- `tests/test_formatter.py`
+
 The tests include:
+- Valid protein sequences.
+- Sequences with missing or invalid data.
+- Validation of tokenizer behavior for different amino acids.
+- Proper error handling for incorrect input types.
 
-Valid protein sequences.
-Sequences with missing or invalid data.
-Validation of tokenizer behavior for different amino acids.
-Proper error handling for incorrect input types.
 ## Usage Instructions
 To use these utilities, clone the repository and install the required dependencies.
 
-Clone the repository:
+1. **Clone the repository**:
+   ```bash
+   git clone <your-github-repo-url>
 
-bash
-Copy code
-git clone <your-github-repo-url>
-Install dependencies: If you have a requirements.txt file, install the required dependencies:
-
-bash
-Copy code
+Install dependencies: requirements.txt file
+```bash
 pip install -r requirements.txt
-Example usage:
+```
 
-python
-Copy code
+## Example Usage
+
+1. **Clone the repository** and install dependencies as described in the usage instructions.
+
+2. **Example usage**:
+
+```python
 from helper_funcs.cleaner_function import cleaner
 from helper_funcs.formatter_function import formatter_LLM
 
-## Example DataFrame for cleaner
+# Example DataFrame for cleaner
 import pandas as pd
 df = pd.DataFrame({
     'Entry': ['A0A044RE18'],
@@ -91,10 +99,10 @@ df = pd.DataFrame({
     'Protein families': ['Peptidase S8 family, Furin subfamily']
 })
 
-#Clean the data
+# Clean the data
 cleaned_data = cleaner(df)
 
-#Tokenizer example for formatter_LLM
+# Tokenizer example for formatter_LLM
 from unsloth import FastLanguageModel
 model, tokenizer = FastLanguageModel.from_pretrained(
     model_name="unsloth/Llama-3.2-3B-Instruct",
@@ -103,10 +111,11 @@ model, tokenizer = FastLanguageModel.from_pretrained(
     load_in_4bit=True
 )
 
-#Update tokenizer with amino acids
+# Update tokenizer with amino acids
 updated_tokenizer = formatter_LLM(tokenizer, ["A", "C", "D", "E"])
 
 print(cleaned_data)
-Conclusion
+```
+## Conclusion
 These functions provide foundational utilities for working with protein sequences and enhancing the tokenization process for large language models in bioinformatics. They have been thoroughly tested and are ready for integration into bioinformatics pipelines.
 
