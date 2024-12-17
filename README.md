@@ -1,7 +1,7 @@
 # Genetic Frame Final Project Submission
 
 ## Project Overview
-This project provides core bioinformatics utilities for analyzing protein sequences and improving the tokenization process for transformer models. The focus is on automating sequence data preparation for large language models (LLMs) in bioinformatics applications.
+This project provides core bioinformatics utilities for analyzing protein sequences and improving the tokenization process for transformer models. The focus is on automating sequence data preparation for large language models (LLMs) in bioinformatics applications. The main part of this model is done in the ipynb notebook and individual functions are listed out here along with their uses. Lora_model is provided as well to view the end result.
 
 The project includes the following functionalities:
 1. **Cleaner**: Converts protein data into a conversational format for LLMs and cleans up data for better readability.
