@@ -7,7 +7,7 @@ The project includes the following functionalities:
 1. **Cleaner**: Converts protein data into a conversational format for LLMs and cleans up data for better readability.
 2. **Formatter_LLM**: Updates the tokenizer to treat amino acids as individual tokens for LLMs, improving the handling of protein sequences in transformer models.
 3. **Genetic_Frame_Final_Proj.ipynb**: Main notebook. Goes through data downloading process, preprocessing, tokenizing data, putting into Llama format, training LLama model, and testing model with the help of the 2 functions above.
-4. **askModel**: Allows you to input an amino acid sequence to the model and will output to you the resulting answer
+4. **askModel**: Allows you to input an amino acid sequence to the model and will output to you the resulting answer.
 
 Both functions are designed to preprocess protein sequences, enabling efficient model training and data analysis for bioinformatics tasks.
 
@@ -21,7 +21,7 @@ For this final project, I developed two functions aimed at simplifying the prepr
    
 4. **Lora_model**: Resulting Llama model created from training the data. The last cells of the Jupyter notebook show how the model is used. When given a proteins amino acid sequence, the model will predict the functionality, subcellular location, domain, and family of the given protein.
    
-5. **askModel**: This function takes in a proteins amino acid sequence in a string as input and runs the Lora_model above. It will print out in a streaming format the models answer.
+5. **askModel**: This function takes in a proteins amino acid sequence in a string as input and runs the Lora_model above. It will print out in a streaming format the models prediction.
 
 ## Function Descriptions
 
