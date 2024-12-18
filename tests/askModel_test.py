@@ -1,7 +1,4 @@
 import pytest
-from transformers import PreTrainedTokenizerFast
-from unittest.mock import MagicMock
-import torch
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
