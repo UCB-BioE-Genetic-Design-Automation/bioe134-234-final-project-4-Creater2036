@@ -100,7 +100,7 @@ Install dependencies: requirements.txt file
 pip install -r requirements.txt
 ```
 
-## Example Usage
+## Example Usage of Individual functions (Look to notebook for reference as to how this is put together)
 
 1. **Clone the repository** and install dependencies as described in the usage instructions.
 
