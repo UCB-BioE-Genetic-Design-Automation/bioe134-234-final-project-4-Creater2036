@@ -7,18 +7,21 @@ The project includes the following functionalities:
 1. **Cleaner**: Converts protein data into a conversational format for LLMs and cleans up data for better readability.
 2. **Formatter_LLM**: Updates the tokenizer to treat amino acids as individual tokens for LLMs, improving the handling of protein sequences in transformer models.
 3. **Genetic_Frame_Final_Proj.ipynb**: Main notebook. Goes through data downloading process, preprocessing, tokenizing data, putting into Llama format, training LLama model, and testing model with the help of the 2 functions above.
+4. **askModel**: Allows you to input an amino acid sequence to the model and will output to you the resulting answer
 
 Both functions are designed to preprocess protein sequences, enabling efficient model training and data analysis for bioinformatics tasks.
 
 ## Scope of Work
-For this final project, I developed two functions aimed at simplifying the preprocessing of protein data for large language models, along with the notebook:
+For this final project, I developed two functions aimed at simplifying the preprocessing of protein data for large language models, the jupyter notebook for showing how the full process of creating the model works, and a Lora_model that contains the resulting model, along with another function that uses the model to produce answers to amino acid inputs:
 1. **Cleaner**: This function processes protein data, converting it into a format that LLMs can understand. The function takes a dataset and cleans it by removing unnecessary information while structuring it as a dialogue between a user and a model.
    
 2. **Formatter_LLM**: This function updates the tokenizer to treat individual amino acids as distinct tokens. This is crucial for improving how protein sequences are tokenized, ensuring that each amino acid is processed correctly by the model.
    
 3. **Genetic_Frame_Final_Proj.ipynb**: Notebook implements fine tuning to tune Llama so it can understand protein sequencing data and predict the function of a protein given its amino acid sequence.
    
-4. **Lora_model**: Resulting Llama model created from training the data. The last cells of the Jupyter notebook show how the model is used. When given a proteins amino acid sequence, the model will predict the functionality, subcellular location, domain, and family of the given protein
+4. **Lora_model**: Resulting Llama model created from training the data. The last cells of the Jupyter notebook show how the model is used. When given a proteins amino acid sequence, the model will predict the functionality, subcellular location, domain, and family of the given protein.
+   
+5. **askModel**: This function takes in a proteins amino acid sequence in a string as input and runs the Lora_model above. It will print out in a streaming format the models answer.
 
 ## Function Descriptions
 
@@ -46,6 +49,20 @@ cleaner(df)
 formatter_LLM(tokenizer, ["A", "C", "D", "E"])
 # Returns: Updated tokenizer with amino acids A, C, D, E as individual tokens
 ```
+
+### 3. askModel (`Question`)
+**Description**: This function takes in a proteins amino acid sequence in a string as input and runs the Lora_model above. It will print out in a streaming format the models answer.
+
+- **Input**: Proteins amino acid sequence in string format
+- **Stdout**: Models prediction as to the functionality, subcellular location, domain, and protein family of the amino acid
+- **Output**: String 'Done' to indicate process was successful
+**Example**:
+
+```python
+Question('MIVGILTTLATLATLAASVPLEERQACSSVWGQCGGQNWSGPTCCA')
+# Returns: 'Done'
+```
+
 ## Error Handling
 
 ### Cleaner
@@ -54,12 +71,16 @@ formatter_LLM(tokenizer, ["A", "C", "D", "E"])
 ### Formatter_LLM
 - **Raises `ValueError`** if the `amino_acids` parameter is not provided as a list.
 
+### askModel
+- **Raises `ValueError`** if input string is empty or all characters are not amino acids.
+
 ## Testing
 Both functions have been thoroughly tested with various input cases, including standard, edge, and invalid cases. Testing was implemented using **pytest**.
 
 ### Test Files:
-- `tests/test_cleaner.py`
-- `tests/test_formatter.py`
+- `tests/cleaner_test.py`
+- `tests/format_LM_test.py`
+- `tests/askModel_test.py`
 
 The tests include:
 - Valid protein sequences.
@@ -86,8 +107,9 @@ pip install -r requirements.txt
 2. **Example usage**:
 
 ```python
-from helper_funcs.cleaner_function import cleaner
-from helper_funcs.formatter_function import formatter_LLM
+from helper_funcs.cleaner import cleaner
+from helper_funcs.format_LM import formatter_LLM
+from helper_funcs.askModel import Question
 
 # Example DataFrame for cleaner
 import pandas as pd
@@ -117,8 +139,8 @@ model, tokenizer = FastLanguageModel.from_pretrained(
 # Update tokenizer with amino acids
 updated_tokenizer = formatter_LLM(tokenizer, ["A", "C", "D", "E"])
 
-print(cleaned_data)
+#Test model on Amino Acid sequence
+Question(df['Sequence'].values[0])
 ```
 ## Conclusion
-These functions provide foundational utilities for working with protein sequences and enhancing the tokenization process for large language models in bioinformatics. They have been thoroughly tested and are ready for integration into bioinformatics pipelines.
-
+These functions provide foundational utilities for working with protein sequences, enhancing the tokenization process for large language models in bioinformatics, and predicting the function of an amino acid sequence. They have been thoroughly tested and are ready for integration into bioinformatics pipelines.
