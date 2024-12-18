@@ -1,7 +1,7 @@
 # Genetic Frame Final Project Submission
 
 ## Project Overview
-This project provides core bioinformatics utilities for analyzing protein sequences and improving the tokenization process for transformer models. The focus is on automating sequence data preparation for large language models (LLMs) in bioinformatics applications. The main part of this model is done in the ipynb notebook and individual functions are listed out here along with their uses. Lora_model is provided as well to view the end result.
+This project is focused on creating a Large Language Model (Llama) fine tuned using supervised learning for predicting overall function of a protein given its amino acid sequence. The main part of this model is done in the ipynb notebook and individual functions are done in the helper_funcs folder and are listed out here along with their uses. Lora_model is provided as well to view the resulting model.
 
 The project includes the following functionalities:
 1. **Cleaner**: Converts protein data into a conversational format for LLMs and cleans up data for better readability.
@@ -12,7 +12,7 @@ The project includes the following functionalities:
 Both functions are designed to preprocess protein sequences, enabling efficient model training and data analysis for bioinformatics tasks.
 
 ## Scope of Work
-For this final project, I developed two functions aimed at simplifying the preprocessing of protein data for large language models, the jupyter notebook for showing how the full process of creating the model works, and a Lora_model that contains the resulting model, along with another function that uses the model to produce answers to amino acid inputs:
+For this final project, I developed two functions aimed at simplifying the preprocessing of protein data for large language models, the jupyter notebook for showing how the full process of creating the model works, and a Lora_model that contains the resulting model along with another function that uses the model to produce answers to amino acid inputs:
 1. **Cleaner**: This function processes protein data, converting it into a format that LLMs can understand. The function takes a dataset and cleans it by removing unnecessary information while structuring it as a dialogue between a user and a model.
    
 2. **Formatter_LLM**: This function updates the tokenizer to treat individual amino acids as distinct tokens. This is crucial for improving how protein sequences are tokenized, ensuring that each amino acid is processed correctly by the model.
