@@ -55,7 +55,7 @@
     ],
     "execution_details": {
       "language": "python",
-      "source": "helper_funcs/cleaner.py",
+      "source": "def cleaner(df): helper_funcs/cleaner.py",
       "invocation": "cleaner(var:df)"
     },
     "text_response": "The provided DataFrame has been successfully cleaned and formatted into a conversational dataset.",
