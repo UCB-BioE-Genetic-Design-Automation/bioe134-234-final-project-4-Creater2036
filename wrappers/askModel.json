@@ -1,0 +1,47 @@
+{
+  "id": "org.c9.function.bioinformatics.QuestionProteinInfo.1",
+  "name": "QuestionProteinInfo",
+  "description": "Queries the fine-tuned LLM for information about a protein sequence based on the input amino acid sequence.",
+  "type": "function",
+  "keywords": ["protein sequence", "bioinformatics", "LLM", "amino acids", "question-answering"],
+  "date_created": null,
+  "date_last_modified": null,
+  "inputs": [
+    {
+      "name": "amino_acid",
+      "type": "string",
+      "description": "The amino acid sequence to query information about."
+    }
+  ],
+  "outputs": [
+    {
+      "type": "string",
+      "description": "The predicted response from the LLM about the provided amino acid sequence."
+    }
+  ],
+  "examples": [
+    {
+      "input": {
+        "amino_acid": "ACDEFGHIKLMNPQRSTVWY"
+      },
+      "output": {
+        "text_response": "This sequence is predicted to perform XYZ function and is localized in the nucleus."
+      }
+    },
+    {
+      "input": {
+        "amino_acid": "INVALIDSEQ"
+      },
+      "output": {
+        "text_response": "Error: Input contains invalid characters! Only valid amino acid letters (A, C, D, etc.) are allowed."
+      }
+    }
+  ],
+  "execution_details": {
+    "language": "python",
+    "source": "def Question(amino_acid): helper_funcs/askModel.py",
+    "invocation": "Question({amino_acid})"
+  },
+  "text_response": "{response}", 
+  "api_calls": []
+}
