@@ -48,7 +48,7 @@
     ],
     "execution_details": {
       "language": "python",
-      "source": "def formatter_LLM(tokenizer, amino_acids): [full function implementation here]",
+      "source": "def formatter_LLM(tokenizer, amino_acids): helper_funcs/format_LM.py",
       "invocation": "formatter_LLM(var:tokenizer, var:amino_acids)"
     },
     "test_cases": [
