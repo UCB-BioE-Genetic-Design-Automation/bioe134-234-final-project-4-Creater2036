@@ -17,8 +17,8 @@ For this final project, I developed two functions aimed at simplifying the prepr
 2. **Formatter_LLM**: This function updates the tokenizer to treat individual amino acids as distinct tokens. This is crucial for improving how protein sequences are tokenized, ensuring that each amino acid is processed correctly by the model.
    
 3. **Genetic_Frame_Final_Proj.ipynb**: Notebook implements fine tuning to tune Llama so it can understand protein sequencing data and predict the function of a protein given its amino acid sequence.
-
-These utilities are critical for transforming raw sequence data into a usable format for downstream tasks such as protein function prediction or sequence analysis.
+   
+4. **Lora_model**: Resulting Llama model created from training the data. The last cells of the Jupyter notebook show how the model is used. When given a proteins amino acid sequence, the model will predict the functionality, subcellular location, domain, and family of the given protein
 
 ## Function Descriptions
 
