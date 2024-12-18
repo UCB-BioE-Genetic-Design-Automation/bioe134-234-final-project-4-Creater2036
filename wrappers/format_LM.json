@@ -30,7 +30,9 @@
           "tokenizer": "PreTrainedTokenizerFast instance",
           "amino_acids": ["A", "C", "D", "E", "F", "G", "H", "I", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "Y"]
         },
-        "output": "PreTrainedTokenizerFast instance with amino acids added as tokens",
+        "output": {
+          "text_response": "Tokenizer updated successfully. All specified amino acids are treated as individual tokens."
+        },
         "description": "Each amino acid is now treated as an individual token by the tokenizer."
       },
       {
@@ -38,7 +40,9 @@
           "tokenizer": "PreTrainedTokenizerFast instance",
           "amino_acids": ["W", "K", "L"]
         },
-        "output": "PreTrainedTokenizerFast instance with only W, K, and L added as individual tokens",
+        "output": {
+          "text_response": "Tokenizer updated successfully. Amino acids W, K, and L are treated as individual tokens."
+        },
         "description": "The amino acids W, K, and L are treated as individual tokens, while others may remain grouped."
       }
     ],
@@ -52,6 +56,8 @@
         "description": "Ensure amino acids are treated as individual tokens",
         "code": "sample_sequences = [\"MSLEQKKGADIISKIL\", \"ACDEFGHIKLMNPQRSTVWY\", \"GTTSPSTLKTKLSEISR\"]\nfor seq in sample_sequences:\n    tokens = tokenizer.tokenize(seq)\n    print(f\"Original: {seq}\")\n    print(f\"Tokens: {tokens}\")\n    print(f\"Decoded: {tokenizer.decode(tokenizer.convert_tokens_to_ids(tokens))}\")\n    print(\"-\" * 20)"
       }
-    ]
+    ],
+    "text_response": "Tokenizer has been successfully updated with the specified amino acids.",
+    "api_calls": []
   }
 }
